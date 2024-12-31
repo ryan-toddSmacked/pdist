@@ -6,6 +6,21 @@ Pairwise distance between pairs of observations.
 
 This library provides functions to compute the pairwise Euclidean distance between points in a numeric matrix. It is inspired by MATLAB's `pdist` function.
 
+## Requirements
+
+A C/C++ compiler, such as GCC of MSVC, that can link with the C math library
+
+### Optional
+
+When compiled the pdist_ functions can take advantage of OpenMP for parallel computation if the compiler supports linking with it. It is not required, but for multi-core systems it can significantly improve performance.
+
+### Building
+
+```bash
+gcc -fPIC -c pdist.c -o pdist.o
+gcc -shared pdist.o -o libpdist.so
+```
+
 ## Functions
 
 ### `pdist_cm`
@@ -75,3 +90,6 @@ int main() {
 
     return 0;
 }
+```
+
+
