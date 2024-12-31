@@ -46,15 +46,29 @@ Include the header file `pdist.h` in your C source file and link against the com
 #include "pdist.h"
 
 int main() {
-    // Example usage
-    float points[] = { /* your data */ };
-    float Z[/* size */];
-    long num_points = /* number of points */;
-    long dim = /* dimension */;
+    #define num_points 3
+    #define dims 2
 
-    int result = pdist_cm(points, Z, num_points, dim);
+    // Example usage
+    // Column major [3x2] matrix
+    // | 0 1 |
+    // | 0 3 |
+    // | 1 5 |
+    float points[num_points*dims] = {
+        0, 0, 1,
+        1, 3, 5
+    };
+
+    // Expects at least [num_points x num_points]
+    float Z[num_points*num_points] = {0};
+
+    int result = pdist_cm(points, Z, num_points, dims);
     if (result == 0) {
         // Success
+        
+        // Values in Z are technically stored in Column major
+        // but because the result is always symmetric.
+        // it doesnt matter... The transpose is itself.
     } else {
         // Error
     }
